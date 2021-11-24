@@ -3,8 +3,9 @@
 A random deck generator for Android: Netrunner
 
 ------------------------------------------------------------------------------
-
-![Escher art by Shawn Ye Zhongyi](escher.jpg)
+<p align="center">
+    <img src="escher.jpg">
+</p>
 
 There is nothing to see here at the moment.
 
