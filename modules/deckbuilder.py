@@ -2,6 +2,12 @@ import random
 
 from classes.Deck import RunnerDeck, CorpDeck
 
+def generate_deck(side, card_pool):
+    if side == 'runner':
+        return generate_runner_deck(card_pool)
+    else:
+        return generate_corp_deck(card_pool)
+
 def random_identity(card_pool):
     identities = [ i for i in card_pool if i['type_code'] == 'identity' ]
     random.shuffle(identities)
