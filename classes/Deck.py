@@ -26,6 +26,10 @@ class Deck:
 
         return id_string + card_string
 
+class RunnerDeck(Deck):
+    def __init__(self, identity):
+        super().__init__(identity)
+
 class CorpDeck(Deck):
     def __init__(self, identity):
         super().__init__(identity)
