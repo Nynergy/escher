@@ -30,7 +30,9 @@ def main():
     while deck.current_deck_size < deck.min_deck_size:
         random.shuffle(runner_cards)
         card = runner_cards.pop()
-        deck.addCard(card, card['faction_code'] == deck.identity['faction_code'])
+        number_to_add = random.randint(1, card['deck_limit'])
+        for i in range(number_to_add):
+            deck.addCard(card, card['faction_code'] == deck.identity['faction_code'])
 
     print(deck)
 
@@ -42,8 +44,7 @@ def construct_card_pool():
 
     card_pool = []
     for card in legal_cards:
-        for i in range(card['deck_limit']):
-            card_pool.append(card)
+        card_pool.append(card)
 
     return card_pool
 
