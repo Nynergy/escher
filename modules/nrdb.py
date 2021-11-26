@@ -42,7 +42,7 @@ def get_current_banlist():
 
 def restrict_card_pool(all_cards, cycles, banlist):
     packs = get_from_nrdb('packs')
-    code_pairs = map(lambda pack: (pack['code'], pack['cycle_code']), packs)
+    code_pairs = map(lambda p: (p['code'], p['cycle_code']), packs)
     code_conversions = { p:c for (p,c) in code_pairs }
 
     def is_in_rotation(c):
@@ -55,7 +55,8 @@ def restrict_card_pool(all_cards, cycles, banlist):
 
     in_rotation_cards = [ c for c in all_cards if is_in_rotation(c) ]
     # We also need to ignore neutral IDs from System Gateway
+    sg_ids = ['30076', '30077']
     legal_cards = [ c for c in in_rotation_cards if is_not_banned(c)
-                                                 and c['code'] not in ['30076', '30077'] ]
+                                                 and c['code'] not in sg_ids ]
 
     return legal_cards

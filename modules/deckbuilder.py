@@ -8,6 +8,15 @@ def generate_deck(side, card_pool):
     else:
         return generate_corp_deck(card_pool)
 
+def generate_runner_deck(card_pool):
+    identity = random_identity(card_pool)
+    deck = RunnerDeck(identity)
+
+    non_id_cards = [ c for c in card_pool if c['type_code'] != 'identity' ]
+    deck = fill_deck(deck, non_id_cards)
+
+    return deck
+
 def random_identity(card_pool):
     identities = [ i for i in card_pool if i['type_code'] == 'identity' ]
     random.shuffle(identities)
@@ -26,24 +35,14 @@ def fill_deck(deck, card_pool):
 
     return deck
 
-def generate_runner_deck(card_pool):
-    # Select an identity
-    identity = random_identity(card_pool)
-    deck = RunnerDeck(identity)
-
-    non_id_cards = [ c for c in card_pool if c['type_code'] != 'identity' ]
-    deck = fill_deck(deck, non_id_cards)
-
-    return deck
-
 def generate_corp_deck(card_pool):
-    # Select an identity
     identity = random_identity(card_pool)
     deck = CorpDeck(identity)
 
-    # Remove agendas and add those to the deck before anything else
+    # Add agendas to the deck before anything else
+    valid_factions = [identity['faction_code'], 'neutral-corp']
     agendas = [ a for a in card_pool if a['type_code'] == 'agenda'
-                                     and a['faction_code'] in [identity['faction_code'], 'neutral-corp'] ]
+                                     and a['faction_code'] in valid_factions ]
     deck = fill_agendas(deck, agendas)
 
     other_cards = [ c for c in card_pool if c['type_code'] not in ['identity', 'agenda'] ]

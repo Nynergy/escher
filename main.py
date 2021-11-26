@@ -13,13 +13,14 @@ def main():
     side_cards = [ c for c in card_pool if c['side_code'] == args['side'] ]
     deck = builder.generate_deck(args['side'], side_cards)
 
-    print(deck)
+    print(deck.jintekiFormat())
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Generate random decks for Android: Netrunner.")
 
     # Required Args
-    parser.add_argument('--side', required=True, choices=['runner', 'corp'])
+    parser.add_argument('--side', required=True, choices=['runner', 'corp'],
+                        help='choose a side to generate a deck for')
 
     args = parser.parse_args()
 
