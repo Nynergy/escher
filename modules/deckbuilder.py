@@ -2,17 +2,25 @@ import random
 
 from classes.Deck import RunnerDeck, CorpDeck
 
-def generate_deck(side, card_pool):
-    if side == 'runner':
-        return generate_runner_deck(card_pool)
+def generate_deck(args, card_pool):
+    if args['side'] == 'runner':
+        return generate_runner_deck(args, card_pool)
     else:
-        return generate_corp_deck(card_pool)
+        return generate_corp_deck(args, card_pool)
 
-def generate_runner_deck(card_pool):
+def generate_runner_deck(args, card_pool):
     identity = random_identity(card_pool)
     deck = RunnerDeck(identity)
 
     non_id_cards = [ c for c in card_pool if c['type_code'] != 'identity' ]
+
+    if args['guaranteed_econ']:
+        gamble = next(card for card in non_id_cards if card['title'] == 'Sure Gamble')
+        non_id_cards.remove(gamble)
+
+        for i in range(gamble['deck_limit']):
+            deck.addCard(gamble, False)
+
     deck = fill_deck(deck, non_id_cards)
 
     return deck
@@ -35,7 +43,7 @@ def fill_deck(deck, card_pool):
 
     return deck
 
-def generate_corp_deck(card_pool):
+def generate_corp_deck(args, card_pool):
     identity = random_identity(card_pool)
     deck = CorpDeck(identity)
 
