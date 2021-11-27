@@ -54,6 +54,14 @@ def generate_corp_deck(args, card_pool):
     deck = fill_agendas(deck, agendas)
 
     other_cards = [ c for c in card_pool if c['type_code'] not in ['identity', 'agenda'] ]
+
+    if args['guaranteed_econ']:
+        hedge = next(card for card in other_cards if card['title'] == 'Hedge Fund')
+        other_cards.remove(hedge)
+
+        for i in range(hedge['deck_limit']):
+            deck.addCard(hedge, False)
+
     deck = fill_deck(deck, other_cards)
 
     return deck
