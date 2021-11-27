@@ -38,6 +38,12 @@ can also use `corp` to generate a corp deck. The final legal deck will be output
 to the command line for you to pipe into a file, or to copy into your
 editor/deckbuilder of choice.
 
+You can also use an optional argument to ensure that any generated decks are
+given 3x Sure Gamble/Hedge Fund. Use the `--guaranteed-econ` flag as shown
+below:
+
+`$ ./main.py --side=corp --guaranteed-econ`
+
 At the moment, _escher_ supports generating legal decks for the Standard format,
 and outputs the decklists in the format used to build decks on
 [Jinteki.net](https://jinteki.net). For more information on the various formats
