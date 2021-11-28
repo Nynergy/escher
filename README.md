@@ -44,10 +44,16 @@ below:
 
 `$ ./main.py --side=corp --guaranteed-econ`
 
+There is a similar flag for guaranteed types in each deck. This means that every
+runner deck will be given one fracter, decoder, and killer before adding the
+rest of the cards. Similarly, each corp deck will be given one barrier, code
+gate, and sentry before the rest of the cards. To enable this behavior, use the
+`--guaranteed-types` flag when invoking _escher_.
+
 At the moment, _escher_ supports generating legal decks for the Standard format,
 and outputs the decklists in the format used to build decks on
 [Jinteki.net](https://jinteki.net). For more information on the various formats
-of Netrunner, visit [this page](https://nisei.net/players/supported-formats/)
+of Netrunner, visit [this page](https://nisei.net/players/supported-formats/).
 
 ## Why does this tool exist?
 
@@ -81,8 +87,6 @@ to its capabilities.
 - Implement more game formats (Eternal, Startup, etc.)
 - Implement more output formats (Octgn, Markdown, etc.)
 - Add more fine-grain control of deck generation
-  - Users should specify if they automatically want 3x Hedge Fund/Sure Gamble
-  - Users should specify if they automatically want all 3 types of breakers/ice
   - Users should be able to set a specific faction to generate a deck for
   - Users should be able to set a specific ID to generate a deck for
   - Etc.
