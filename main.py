@@ -25,6 +25,8 @@ def parse_arguments():
     # Optional Args
     parser.add_argument('--guaranteed-econ', action='store_true',
                         help='guarantee that each deck has 3x Sure Gamble/Hedge Fund')
+    parser.add_argument('--guaranteed-types', action='store_true',
+                        help='guarantee that each deck has all three main types of ice/breakers')
 
     args = parser.parse_args()
 

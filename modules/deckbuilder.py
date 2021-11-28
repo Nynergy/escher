@@ -21,6 +21,15 @@ def generate_runner_deck(args, card_pool):
         for i in range(gamble['deck_limit']):
             deck.addCard(gamble, False)
 
+    if args['guaranteed_types']:
+        types = ['Fracter', 'Decoder', 'Killer']
+        for breaker_type in types:
+            random.shuffle(non_id_cards)
+            icebreaker = next(card for card in non_id_cards if 'keywords' in card
+                                                            and breaker_type in card['keywords'])
+            non_id_cards.remove(icebreaker)
+            deck.addCard(icebreaker, icebreaker['faction_code'] == deck.identity['faction_code'])
+
     deck = fill_deck(deck, non_id_cards)
 
     return deck
@@ -61,6 +70,15 @@ def generate_corp_deck(args, card_pool):
 
         for i in range(hedge['deck_limit']):
             deck.addCard(hedge, False)
+
+    if args['guaranteed_types']:
+        types = ['Barrier', 'Code Gate', 'Sentry']
+        for ice_type in types:
+            random.shuffle(other_cards)
+            ice = next(card for card in other_cards if 'keywords' in card
+                                                    and ice_type in card['keywords'])
+            other_cards.remove(ice)
+            deck.addCard(ice, ice['faction_code'] == deck.identity['faction_code'])
 
     deck = fill_deck(deck, other_cards)
 
