@@ -1,12 +1,21 @@
 #!/usr/bin/env python3
 
 import argparse
+import sys
 
 import modules.deckbuilder as builder
 import modules.nrdb as nrdb
 
+MAX_ICE = 30
+
 def main():
     args = parse_arguments()
+
+    # Sanity checks on optional parameters
+    min_ice = args['minimum_ice']
+    if min_ice < 0 or min_ice > MAX_ICE:
+        error_msg = f'ERROR: Minimum number of ice must be between 0 and {MAX_ICE}'
+        die(error_msg)
 
     card_pool = nrdb.construct_card_pool()
 
@@ -27,10 +36,16 @@ def parse_arguments():
                         help='guarantee that each deck has 3x Sure Gamble/Hedge Fund')
     parser.add_argument('--guaranteed-types', action='store_true',
                         help='guarantee that each deck has all three main types of ice/breakers')
+    parser.add_argument('--minimum-ice', type=int, default=0,
+                        help='guarantee that each corp deck has at least <number> ice (default is 0)')
 
     args = parser.parse_args()
 
     return vars(args)
+
+def die(error_msg):
+    print(error_msg)
+    sys.exit(1)
 
 if __name__ == "__main__":
     main()

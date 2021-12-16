@@ -10,10 +10,12 @@ class Deck:
     def addCard(self, card, in_faction):
         if not in_faction:
             if card['faction_cost'] + self.current_influence > self.influence_limit:
-                return
+                return False
             self.current_influence += card['faction_cost']
 
         self.putCardInDeck(card)
+
+        return True
 
     def putCardInDeck(self, card):
         count = 0 if card['title'] not in self.cards else self.cards[card['title']]
@@ -52,10 +54,12 @@ class CorpDeck(Deck):
 
     def addAgenda(self, card):
         if card['faction_cost'] + self.current_influence > self.influence_limit:
-            return
+            return False
         if card['agenda_points'] + self.current_agenda_points > self.agenda_point_range[1]:
-            return
+            return False
         self.current_influence += card['faction_cost']
         self.current_agenda_points += card['agenda_points']
 
         self.putCardInDeck(card)
+
+        return True

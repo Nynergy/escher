@@ -80,6 +80,18 @@ def generate_corp_deck(args, card_pool):
             other_cards.remove(ice)
             deck.addCard(ice, ice['faction_code'] == deck.identity['faction_code'])
 
+    num_ice = 0
+    while num_ice < args['minimum_ice']:
+        random.shuffle(other_cards)
+        ice = next(card for card in other_cards if card['type_code'] == 'ice')
+
+        other_cards.remove(ice)
+        number_to_add = random.randint(1, ice['deck_limit'])
+        for i in range(number_to_add):
+            add_success = deck.addCard(ice, ice['faction_code'] == deck.identity['faction_code'])
+            if add_success:
+                num_ice += 1
+
     deck = fill_deck(deck, other_cards)
 
     return deck
