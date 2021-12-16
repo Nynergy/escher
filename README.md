@@ -50,6 +50,18 @@ rest of the cards. Similarly, each corp deck will be given one barrier, code
 gate, and sentry before the rest of the cards. To enable this behavior, use the
 `--guaranteed-types` flag when invoking _escher_.
 
+You can also guarantee that generated corp decks will have a certain minimum
+number of ice by using the `--minimum-ice` option, as seen below:
+
+`$ ./main.py --side=corp --minimum-ice 10`
+
+This will ensure that the deck has _at least_ 10 ice, though it may end up with
+more. The number provided must be between 0 and an arbitrary maximum, which I
+have set to 30. If you'd like me to change this value, open an issue and I'll
+look into it.
+
+_Note: Using this option when generating runner decks does nothing._
+
 At the moment, _escher_ supports generating legal decks for the Standard format,
 and outputs the decklists in the format used to build decks on
 [Jinteki.net](https://jinteki.net). For more information on the various formats
@@ -82,11 +94,7 @@ Overall, use this tool for some fun, nonsensical games of Netrunner. I hope you
 enjoy what I've created here, and I hope to continue maintaining it and adding
 to its capabilities.
 
-### Plans for this project
+------------------------------------------------------------------------------
 
-- Implement more game formats (Eternal, Startup, etc.)
-- Implement more output formats (Octgn, Markdown, etc.)
-- Add more fine-grain control of deck generation
-  - Users should be able to set a specific faction to generate a deck for
-  - Users should be able to set a specific ID to generate a deck for
-  - Etc.
+Have ideas for functionality you'd like to see in _escher_? Feel free to open an
+issue and I'll see if I can't add it to the program :)
