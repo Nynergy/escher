@@ -62,6 +62,19 @@ look into it.
 
 _Note: Using this option when generating runner decks does nothing._
 
+You can specify a faction to pull a random identity from with the `--faction`
+option:
+
+`$ ./main.py --side=runner --faction anarch`
+
+The valid factions for corp decks are: `haas-bioroid`, `jinteki`, `nbn`,
+`weyland-consortium`
+The valid factions for runner decks are: `anarch`, `criminal`, `shaper`,
+`minifaction`
+
+If you select `minifaction` as your runner faction, the identity will be
+randomly selected from Adam, Apex, and Sunny Lebeau.
+
 At the moment, _escher_ supports generating legal decks for the Standard format,
 and outputs the decklists in the format used to build decks on
 [Jinteki.net](https://jinteki.net). For more information on the various formats
