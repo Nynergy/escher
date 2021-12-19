@@ -7,6 +7,8 @@ import modules.deckbuilder as builder
 import modules.nrdb as nrdb
 
 MAX_ICE = 30
+CORP_FACTIONS = ['haas-bioroid', 'jinteki', 'nbn', 'weyland-consortium']
+RUNNER_FACTIONS = ['anarch', 'criminal', 'shaper', 'minifaction']
 
 def main():
     args = parse_arguments()
@@ -16,6 +18,15 @@ def main():
     if min_ice < 0 or min_ice > MAX_ICE:
         error_msg = f'ERROR: Minimum number of ice must be between 0 and {MAX_ICE}'
         die(error_msg)
+
+    faction = args['faction']
+    if faction:
+        if args['side'] == 'corp' and faction not in CORP_FACTIONS:
+            error_msg = f"ERROR: '{faction}' is not a valid corp faction"
+            die(error_msg)
+        elif args['side'] == 'runner' and faction not in RUNNER_FACTIONS:
+            error_msg = f"ERROR: '{faction}' is not a valid runner faction"
+            die(error_msg)
 
     card_pool = nrdb.construct_card_pool()
 
@@ -38,6 +49,8 @@ def parse_arguments():
                         help='guarantee that each deck has all three main types of ice/breakers')
     parser.add_argument('--minimum-ice', type=int, default=0,
                         help='guarantee that each corp deck has at least <number> ice (default is 0)')
+    parser.add_argument('--faction', choices=CORP_FACTIONS + RUNNER_FACTIONS,
+                        help='generate a deck with a random identity from the specified faction')
 
     args = parser.parse_args()
 
