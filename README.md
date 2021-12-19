@@ -68,7 +68,7 @@ option:
 `$ ./main.py --side=runner --faction anarch`
 
 The valid factions for corp decks are: `haas-bioroid`, `jinteki`, `nbn`,
-`weyland-consortium`
+`weyland-consortium`<br>
 The valid factions for runner decks are: `anarch`, `criminal`, `shaper`,
 `minifaction`
 
